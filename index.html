@@ -21,6 +21,14 @@
     </style>
     <script src="./js/create_table.js"></script>
     <script src="./js/add_events.js"></script>
+    <script>
+        function download(text, name, type) {
+            var a = document.getElementById("a");
+            var file = new Blob([text], {type: type});
+            a.href = URL.createObjectURL(file);
+            a.download = name;
+        }
+    </script>
 </head>
 <body>
 <div class="table_container">
@@ -28,6 +36,8 @@
 </div>
 <textarea placeholder="json for create table"></textarea>
 <button>Create table</button>
+<a href="" id="a">click here to download your file</a>
+<button onclick="download('file text', 'myfilename.txt', 'text/plain')">Create file</button>
 
 </body>
 </html>

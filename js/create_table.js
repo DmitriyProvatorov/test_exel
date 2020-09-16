@@ -37,7 +37,8 @@ createTable: function() {
     create_table_structure: function(head, body, _json){
         _json.forEach(function(item){
             if(item.isArray()){
-                create_table_structure(head, body, _json);
+                //ToDO не реализую многострочность поскольку структура в задании не предусмсатривает её
+                //create_table_structure(head, body, _json);
             }
             else{
 
