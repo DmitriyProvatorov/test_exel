@@ -28,6 +28,14 @@
             a.href = URL.createObjectURL(file);
             a.download = name;
         }
+
+
+
+
+
+
+
+
     </script>
 </head>
 <body>
@@ -38,6 +46,8 @@
 <button>Create table</button>
 <a href="" id="a">click here to download your file</a>
 <button onclick="download('file text', 'myfilename.txt', 'text/plain')">Create file</button>
+<input type="file" id="input_file">
+<pre id="file"></pre>
 
 </body>
 </html>

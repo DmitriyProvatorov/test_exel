@@ -1,11 +1,23 @@
 let creater = {
     getJson: function(json_string){
         try{
-            this._json = JSON.parse(json_string);
+            this.model = JSON.parse(json_string);
 
         }
         catch (e) {
            alert( "Not valid Json")
+        }
+        finally{
+            console.log("!in finaly")
+            if(!this.model){
+               if( /,/.test(json_string)){
+                   let arr_csv =json_string.split(",");
+                   this.model = [];
+                   for (item of arr_csv){
+                       this.model.push({name: null, value: item})
+                   }
+               }
+            }
         }
     },
     create: function(){
@@ -13,8 +25,12 @@ let creater = {
     creater.getJson(json_string);
     creater.createTable();
 },
-
+// [{"name":"name1", "value":"value1"},{"name":"name2", "value":"value2"}]
 createTable: function() {
+
+     if(!this.model) {
+         return;
+     }
 
     let container = document.querySelector(".table_container")
     let fragment = document.createDocumentFragment();
@@ -22,27 +38,31 @@ createTable: function() {
     let table = document.createElement("table");
     let thead = document.createElement("thead");
     let head_tr = document.createElement("tr");
-    let tbody = document.createElement("body");
+    let tbody = document.createElement("tbody");
+    let body_tr = document.createElement("tr");
+    tbody.appendChild(body_tr);
 
     thead.appendChild(head_tr);
 
     table.appendChild(thead);
     table.appendChild(tbody);
-    table.appendChild(tbody);
-    this.create_table_structure(head_tr, tbody, this._json);
+    console.log(this.model)
+    this.create_table_structure(head_tr, body_tr, this.model);
     fragment.appendChild(table);
     container.innerHTML="";
     container.appendChild(fragment);
     },
     create_table_structure: function(head, body, _json){
         _json.forEach(function(item){
-            if(item.isArray()){
-                //ToDO не реализую многострочность поскольку структура в задании не предусмсатривает её
-                //create_table_structure(head, body, _json);
-            }
-            else{
 
-            }
+                let th_head =   document.createElement("th");
+                th_head.textContent = item.value;
+                    let th_body = document.createElement("th");
+                th_body.textContent = item.name;
+                head.appendChild(th_head);
+                body.appendChild(th_body);
+
+
         });
     }
 };
