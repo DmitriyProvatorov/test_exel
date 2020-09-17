@@ -1,3 +1,8 @@
+const audio = new Audio();
+audio.preload = 'auto';
+audio.src = "./sounds/Sound_08029.mp3";
+
+
 let controller = {
     model:{json: null, lang: document.documentElement.lang},
     getJson: function(json_string){
@@ -76,10 +81,8 @@ createTable: function() {
 
 
         });
-        const audio = new Audio();
-        audio.preload = 'auto';
-        audio.src = "./sounds/Sound_08029.mp3";
         audio.play();
+
     },
 
 
@@ -87,6 +90,7 @@ createTable: function() {
     createJsonString: function(){
 
         return JSON.stringify(this.model.json);
+
 
 
 
@@ -124,11 +128,13 @@ createTable: function() {
         console.log(this)
         let _string = this.createJsonString();
         this.addToTextArea(_string);
+        audio.play();
 
     },
     addTextAreaCSV: function(){
         let _string =this.createCSV();
         this.addToTextArea(_string)
+        audio.play();
     },
     showHideMenu(ev){
         console.log(ev)
@@ -143,7 +149,13 @@ createTable: function() {
             _menu.style.display = "none";
             controller.model.showMenu = false;
         }
+        this.soundPlay();
 
 
+
+    },
+    soundPlay(){
+        audio.play();
+        setTimeout(function(){audio.currentTime = 0.0;}, 2000)
     }
 };
