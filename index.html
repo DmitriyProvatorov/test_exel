@@ -9,18 +9,134 @@
             padding: 0;
         }
         textarea{
-            width: 80%;
-            resize: none;
-            margin: 20px 0px 20px 20px;
+            overflow: auto;
+            resize: vertical;
             display: block;
+            width: 50%;
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            font-family: inherit;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            margin-bottom: 1em;
         }
+
+        textarea:focus{
+            outline: none !important;
+            border: 1px solid #29B0D9!important;
+            border-top: none!important;
+            border-left: none!important;
+            border-right: none!important;
+
+        }
+        button, a{
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            border-spacing: 2px;
+            border-color: grey;
+            border-collapse: collapse;
+
+        }
+        table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #eceeef;
+        }
+        tbody {
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+        table th, table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #eceeef;
+
+
+
+        }
+
+
+        @media (min-width: 544px) {
+            .table_container {
+                padding: 1.5rem;
+                margin: 5px ;
+                border-width: .2rem;
+                border: 2px solid #eceeef;
+
+            }
+        }
+        tbody th{
+            font-weight: normal;
+            cursor: pointer;
+        }
+        th{
+
+
+        }
+        tr{
+
+        }
+
+        .events {
+            margin-top: 1em;
+        }
+
+        .menu {
+            position: absolute;
+            background-color: #6c757d;
+            border-radius: 6px;
+            color: white;
+            top: 10px;
+            left:10px;
+            height: 2.5em;
+            display: none}
+
         button{
-            margin-left: 20px;
-            display: block;
+            cursor: pointer;
         }
+
     </style>
     <script src="./js/create_table.js"></script>
     <script src="./js/add_events.js"></script>
+    <script src="./js/getlettering.js"></script>
     <script>
         function download(text, name, type) {
             var a = document.getElementById("a");
@@ -39,15 +155,27 @@
     </script>
 </head>
 <body>
+<div class="menu">
+    <button>Add</button>
+    <button>Change</button>
+    <button>Delete</button>
+</div>
 <div class="table_container">
 
 </div>
-<textarea placeholder="json for create table"></textarea>
+<textarea placeholder="json or csv for create table"></textarea>
 <button>Create table</button>
+<button>Get Json</button>
+<button>Get CSV</button>
+
+<div class="events">
+    <button onclick="download('file text', 'myfilename.txt', 'text/plain')">Create file json</button>
 <a href="" id="a">click here to download your file</a>
-<button onclick="download('file text', 'myfilename.txt', 'text/plain')">Create file</button>
-<input type="file" id="input_file">
+    <button onclick="download('file text', 'myfilename.txt', 'text/plain')">Create file csv</button>
+
+    <input type="file" id="input_file">
 <pre id="file"></pre>
+</div>
 
 </body>
 </html>

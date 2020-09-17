@@ -1,8 +1,15 @@
 window.onload = function(){
-    let button_create_table = document.querySelector('button').addEventListener('click', creater.create);
+    document.querySelectorAll('button')[0].addEventListener('click', controller.create);
+    document.querySelectorAll('button')[1].addEventListener('click', controller.addTextAreaJson.bind(controller));
+    document.querySelectorAll('button')[2].addEventListener('click', controller.addTextAreaCSV.bind(controller));
+
+    document.querySelector('.table_container').addEventListener('click', controller.showHideMenu.bind(controller));
+
+    getWord();
 
 
 
+    /*
     let inputFile = document.querySelector("#input_file");
     console.log(inputFile)
     inputFile.onchange =function() {
@@ -14,6 +21,8 @@ window.onload = function(){
         });
         reader.readAsText(inputFile.files[0]);
     }
+
+     */
 
 }
     //на документ и по дата атрибутам смотреть что есть что ну или по тегу
