@@ -1,7 +1,7 @@
 window.onload = function(){
-    document.querySelectorAll('button')[0].addEventListener('click', controller.create);
-    document.querySelectorAll('button')[1].addEventListener('click', controller.addTextAreaJson.bind(controller));
-    document.querySelectorAll('button')[2].addEventListener('click', controller.addTextAreaCSV.bind(controller));
+    document.querySelector('.create').addEventListener('click', controller.create);
+    document.querySelector('.get_json').addEventListener('click', controller.addTextAreaJson.bind(controller));
+    document.querySelector('.get_csv').addEventListener('click', controller.addTextAreaCSV.bind(controller));
 
     document.querySelector('.table_container').addEventListener('click', controller.showHideMenu.bind(controller));
 
