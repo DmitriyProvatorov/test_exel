@@ -1,8 +1,8 @@
 let _DICTIONARY;
 
-function getWord() {
+function getWord(_string) {
     // return
-    console.log('get')
+
     let defaultLang = "en";
     const DICTIONARY = {
         en: {
@@ -15,7 +15,11 @@ function getWord() {
             "Add": "Add",
             "Change": "Change",
             "Delete": "Delete",
-            "Load from file": "Load from file"
+            "Load from file": "Load from file",
+            "download json file": "download json file",
+            "download csv file": "download csv file",
+            "check CSV": "check CSV",
+            "Not valid Json": "Not valid Json"
         },
         ru: {
             "Create table": "Создать таблицу",
@@ -27,30 +31,38 @@ function getWord() {
             "Add": "Добавить",
             "Change": "Изменить",
             "Delete": "Удалить",
-            "Load from file": "Загрузить из файла"
+            "Load from file": "Загрузить из файла",
+            "download json file": "скачать  json файл",
+            "download csv file": "скачать csv файл",
+            "check CSV": "Проверка CSV",
+            "Not valid Json": "Не валидный Json"
         }
     }
 
 
-    document.querySelectorAll("button,textarea").forEach(function (node) {
 
-        console.log('in node')
+    if (!DICTIONARY[controller.model.lang]) {
+        _DICTIONARY = DICTIONARY[defaultLang]
+    } else {
+        _DICTIONARY = DICTIONARY[controller.model.lang ]
+    }
+    if(_string){
+        console.log(_DICTIONARY, _string)
+        return _DICTIONARY[ _string]
+    } else {
+
+        document.querySelectorAll("button,textarea, a").forEach(function (node) {
 
 
-        if (node.textContent || node.getAttribute("placeholder")) {
+            if (node.textContent || node.getAttribute("placeholder")) {
 
 
-            if (!DICTIONARY[controller.model.lang]) {
-                _DICTIONARY = DICTIONARY[defaultLang]
-            } else {
-                _DICTIONARY = DICTIONARY[controller.model.lang]
+                changeContent(node)
+
             }
 
-
-            changeContent(node)
-
-        }
-    });
+        });
+    }
 
     function changeContent(node) {
 

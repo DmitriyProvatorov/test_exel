@@ -7,19 +7,19 @@ let controller = {
         this.audio = audio;
     },
     getJson: function (json_string) {
-        console.log('in get');
+
         try {
             this.model.json = JSON.parse(json_string);
-            console.log( this.model.json)
+
         } catch (e) {
-            alert("Not valid Json");
+            alert(getWord("Not valid Json"));
         } finally {
             s = json_string.split("\n");
 
 
             if (!this.model.json) {
                 if (/,/.test(json_string) && /\n/.test(json_string)) {
-                    alert("check CSV")
+                    alert(getWord("check CSV"))
                     let arr_csv = json_string.split("\n");
                     arr_csv[0] = arr_csv[0].split(",");
                     arr_csv[1] = arr_csv[1].split(",");
@@ -40,6 +40,9 @@ let controller = {
     },
 // [{"name":"name1", "value":"value1"},{"name":"name2", "value":"value2"}]
     createTable: function () {
+        if(!this.model.json) {
+            return;
+        }
         let container = document.querySelector(".table_container")
         let fragment = document.createDocumentFragment();
         let table = document.createElement("table");
@@ -83,7 +86,7 @@ let controller = {
     createStringCSV: function (_arr, paramName) {
         let _string = "";
         _arr.forEach(function (item, index) {
-            console.log(_string, item[paramName])
+
             if (index) {
                 _string += ",";
             }
@@ -200,16 +203,16 @@ let controller = {
                     if (ev.keyCode === 13) {
                         // Cancel the default action, if needed
                         ev.preventDefault();
-                        console.log(controller)
+
                         controller.model.json[controller.model.cellNum][controller.model.fieldName] = ev.target.value;
-                        console.log(controller.model.json)
+
                         controller.changeModelRemoveSelectField(ev);
                         controller.createTable();
                     }
 
                 });
                 this.model.cellectedField.classList.remove("active");
-                console.log(this.model.cellectedField)
+
                 this.model.cellectedField.innerHTML = "";
                 this.model.cellectedField.appendChild(_input);
                 break;
@@ -249,7 +252,7 @@ let controller = {
 
                 controller.getJson(this.result);
                 controller.createTable();
-                console.log(typeof this.result);
+
             });
             reader.readAsText(inputFile.files[0]);
         }

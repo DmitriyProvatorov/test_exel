@@ -8,22 +8,7 @@
     <script src="./js/create_table.js"></script>
     <script src="./js/add_events.js"></script>
     <script src="./js/getlettering.js"></script>
-    <script>
-        function download(text, name, type) {
-            var a = document.getElementById("a");
-            var file = new Blob([text], {type: type});
-            a.href = URL.createObjectURL(file);
-            a.download = name;
-        }
 
-
-
-
-
-
-
-
-    </script>
 </head>
 <body>
 <div class="menu">
@@ -42,8 +27,8 @@
 
 <div class="events">
 
-<a href="" i>click here to download your json file</a>
-    <a href="" >click here to download your csv file</a>
+<a href="" >download json file</a>
+    <a href="" >download csv file</a>
 
     <input type="file" id="input_file">
 <pre id="file"></pre>
