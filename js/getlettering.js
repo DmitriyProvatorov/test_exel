@@ -1,47 +1,43 @@
 let _DICTIONARY;
 
-function getWord(){
-   // return
+function getWord() {
+    // return
     console.log('get')
     let defaultLang = "en";
     const DICTIONARY = {
         en: {
-            "Create table" : "Create table",
+            "Create table": "Create table",
             "Get Json": "Get Json",
             "Get CSV": "Get CSV",
             "Create file json": "Create file json",
-            "Create file csv":  "Create file csv",
+            "Create file csv": "Create file csv",
             "json or csv for create table": "json or csv for create table",
             "Add": "Add",
             "Change": "Change",
-            "Delete": "Delete"
+            "Delete": "Delete",
+            "Load from file": "Load from file"
         },
         ru: {
-            "Create table" : "Создать таблицу",
+            "Create table": "Создать таблицу",
             "Get Json": "Получить Json",
             "Get CSV": "Получить CSV",
             "Create file json": "Создать файл json",
-            "Create file csv":  "Создать файл csv",
-            "json or csv for create table" : "json or csv для создания таблицы",
+            "Create file csv": "Создать файл csv",
+            "json or csv for create table": "json or csv для создания таблицы",
             "Add": "Добавить",
             "Change": "Изменить",
-            "Delete": "Удалить"
+            "Delete": "Удалить",
+            "Load from file": "Загрузить из файла"
         }
     }
 
 
-
-    document.querySelectorAll("button,textarea").forEach(function(node) {
+    document.querySelectorAll("button,textarea").forEach(function (node) {
 
         console.log('in node')
 
 
-        if(node.textContent || node.getAttribute("placeholder")) {
-
-
-
-
-
+        if (node.textContent || node.getAttribute("placeholder")) {
 
 
             if (!DICTIONARY[controller.model.lang]) {
@@ -51,40 +47,37 @@ function getWord(){
             }
 
 
-
             changeContent(node)
 
         }
     });
 
-    function changeContent(node){
-        console.log(node)
+    function changeContent(node) {
+
         let inscription = node.textContent || node.getAttribute("placeholder");
 
-        if( node.hasAttribute("placeholder")){
-            console.log(1)
+        if (node.hasAttribute("placeholder")) {
+
             if (!_DICTIONARY[inscription]) {
 
-                node.setAttribute("placeholder",  DICTIONARY[defaultLang][inscription]);
+                node.setAttribute("placeholder", DICTIONARY[defaultLang][inscription]);
             } else {
 
-                node.setAttribute("placeholder",  _DICTIONARY[inscription]);
+                node.setAttribute("placeholder", _DICTIONARY[inscription]);
 
             }
-        }
-        else if( node.textContent ){
-            console.log(2)
+        } else if (node.textContent) {
+
             if (!_DICTIONARY[inscription]) {
 
 
-                node.textContent =  DICTIONARY[defaultLang][inscription];
+                node.textContent = DICTIONARY[defaultLang][inscription];
             } else {
 
-                node.textContent =  _DICTIONARY[inscription]
+                node.textContent = _DICTIONARY[inscription]
             }
         }
     }
-
 
 
 }
