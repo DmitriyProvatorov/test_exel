@@ -19,7 +19,8 @@ function getWord(_string) {
             "download json file": "download json file",
             "download csv file": "download csv file",
             "check CSV": "check CSV",
-            "Not valid Json": "Not valid Json"
+            "Not valid Json": "Not valid Json",
+            "Change Order With" : "Change Order with"
         },
         ru: {
             "Create table": "Создать таблицу",
@@ -35,7 +36,8 @@ function getWord(_string) {
             "download json file": "скачать  json файл",
             "download csv file": "скачать csv файл",
             "check CSV": "Проверка CSV",
-            "Not valid Json": "Не валидный Json"
+            "Not valid Json": "Не валидный Json",
+            "Change Order With" : "Поменять местами c"
         }
     }
 

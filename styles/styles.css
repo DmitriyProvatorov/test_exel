@@ -147,3 +147,8 @@ input {
 #input_file{
     display: none;
 }
+.move{
+    display: none;
+    border: 1px solid black;
+    position: absolute;
+}

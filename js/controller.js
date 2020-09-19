@@ -6,35 +6,36 @@ let controller = {
         audio.src = "./sounds/Sound_08029.mp3";
         this.audio = audio;
     },
-    getJson: function (json_string) {
+    getJson: function (jsonString) {
 
         try {
-            this.model.json = JSON.parse(json_string);
+            this.model.json = JSON.parse(jsonString);
 
         } catch (e) {
             alert(getWord("Not valid Json"));
         } finally {
-            s = json_string.split("\n");
+            s = jsonString.split("\n");
 
 
             if (!this.model.json) {
-                if (/,/.test(json_string) && /\n/.test(json_string)) {
+                if (/,/.test(jsonString) && /\n/.test(jsonString)) {
                     alert(getWord("check CSV"))
-                    let arr_csv = json_string.split("\n");
-                    arr_csv[0] = arr_csv[0].split(",");
-                    arr_csv[1] = arr_csv[1].split(",");
+                    let arrCsv = jsonString.split("\n");
+                    arrCsv[0] = arrCsv[0].split(",");
+                    arrCsv[1] = arrCsv[1].split(",");
                     this.model.json = [];
-                    let _lenght_max = arr_csv[0].length > arr_csv[1].length ? arr_csv[0].length : arr_csv[1].length;
-                    for (let i = 0; i <= _lenght_max; i++) {
-                        this.model.json.push({name: arr_csv[0][i], value: arr_csv[1][i]});
+                    let _lenghtMax = arrCsv[0].length > arrCsv[1].length ? arrCsv[0].length : arrCsv[1].length;
+                    for (let i = 0; i <= _lenghtMax; i++) {
+                        this.model.json.push({name: arrCsv[0][i], value: arrCsv[1][i]});
                     }
                 }
             }
         }
     },
     create: function () {
-        let json_string = document.querySelector('textarea').value;
-        controller.getJson(json_string);
+        let jsonString = document.querySelector('textarea').value;
+        controller.model.json = false;
+        controller.getJson(jsonString);
         controller.createTable();
 
     },
@@ -47,35 +48,37 @@ let controller = {
         let fragment = document.createDocumentFragment();
         let table = document.createElement("table");
         let thead = document.createElement("thead");
-        let head_tr = document.createElement("tr");
+        let headTr = document.createElement("tr");
         let tbody = document.createElement("tbody");
-        let body_tr = document.createElement("tr");
-        tbody.appendChild(body_tr);
-        thead.appendChild(head_tr);
+        let bodyTr = document.createElement("tr");
+
+
+        tbody.appendChild(bodyTr);
+        thead.appendChild(headTr);
         table.appendChild(thead);
         table.appendChild(tbody);
-        this.create_table_structure(head_tr, body_tr, this.model.json);
+        this.createTableStructure(headTr, bodyTr, this.model.json);
         fragment.appendChild(table);
         container.innerHTML = "";
         container.appendChild(fragment);
         this.downloadJson();
         this.downloadCsv();
     },
-    create_table_structure: function (head, body, _json) {
+    createTableStructure: function (head, body, _json) {
         _json.forEach(function (item, index) {
 
-            let th_head = document.createElement("th");
-            th_head.textContent = item.name;
-            th_head.dataset.cellNum = index;
-            th_head.dataset.fieldName = "name";
-            th_head.setAttribute("title", item.name);
-            let th_body = document.createElement("th");
-            th_body.setAttribute("title", item.value);
-            th_body.textContent = item.value;
-            th_body.dataset.cellNum = index;
-            th_body.dataset.fieldName = "value";
-            head.appendChild(th_head);
-            body.appendChild(th_body);
+            let thHead = document.createElement("th");
+            thHead.textContent = item.name;
+            thHead.dataset.cellNum = index;
+            thHead.dataset.fieldName = "name";
+            thHead.setAttribute("title", item.name);
+            let thBody = document.createElement("th");
+            thBody.setAttribute("title", item.value);
+            thBody.textContent = item.value;
+            thBody.dataset.cellNum = index;
+            thBody.dataset.fieldName = "value";
+            head.appendChild(thHead);
+            body.appendChild(thBody);
         });
         this.soundPlay();
     },
@@ -110,13 +113,13 @@ let controller = {
     addTextAreaJson: function () {
         let _string = this.createJsonString();
         this.addToTextArea(_string);
-        this.soundPlay();
+
 
     },
     addTextAreaCSV: function () {
         let _string = this.createCSV();
         this.addToTextArea(_string)
-        this.soundPlay();
+
     },
     showHideMenu(ev) {
 
@@ -126,6 +129,11 @@ let controller = {
         let _menu = document.querySelector('.menu');
         _menu.style.top = ev.clientY + "px";
         _menu.style.left = ev.clientX + "px";
+        if(this.model.cellNumForChange){
+            this.changeFields(ev);
+            return;
+        }
+
         if (!this.model.cellectedField) {
             _menu.style.display = "block";
             controller.model.showMenu = true;
@@ -145,9 +153,30 @@ let controller = {
         }
 
 
-        // this.soundPlay();
+
         this.selectСell(ev);
 
+
+    },
+
+    changeFields(ev){
+
+        if(!this.model.cellNumForChange){
+            return;
+        }
+
+        let cellNum = ev.target.dataset.cellNum;
+        let fieldName = ev.target.dataset.fieldName;
+
+        let _dataChange = JSON.parse(JSON.stringify(this.model.json[cellNum]));
+
+        this.model.json[cellNum]= this.model.json[this.model.cellNumForChange];
+          this.model.json[this.model.cellNumForChange] = _dataChange;
+
+        this.model.cellNumForChange = false;
+        this.model.fieldNameForChange = false;
+
+        this.createTable();
 
     },
     selectСell(ev) {
@@ -167,8 +196,8 @@ let controller = {
 
         if (this.model.showMenu) {
             ev.target.classList.add("active")
-            this.model.cellNum = event.target.dataset.cellNum;
-            this.model.fieldName = event.target.dataset.fieldName;
+            this.model.cellNum = ev.target.dataset.cellNum;
+            this.model.fieldName = ev.target.dataset.fieldName;
         } else {
             this.changeModelRemoveSelectField(ev)
         }
@@ -222,7 +251,12 @@ let controller = {
                 this.changeModelRemoveSelectField();
                 this.createTable();
                 break;
+            case "change-order":
 
+
+                this.model.cellNumForChange =  this.model.cellNum;
+                this.model.fieldNameForChange =  this.model.fieldName;
+                break;
         }
 
         document.querySelector('.menu').style.display = "none";
@@ -257,4 +291,5 @@ let controller = {
             reader.readAsText(inputFile.files[0]);
         }
     }
+
 };
