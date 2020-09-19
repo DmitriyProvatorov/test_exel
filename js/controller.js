@@ -275,6 +275,7 @@ let controller = {
         a.download = 'table.csv';
     },
     loadFile(){
+        this.model.json = false;
         let inputFile = document.querySelector("#input_file");
         inputFile.click();
 
