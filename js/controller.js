@@ -57,14 +57,14 @@ let controller = {
         thead.appendChild(headTr);
         table.appendChild(thead);
         table.appendChild(tbody);
-        this.createTableStructure(headTr, bodyTr, this.model.json);
+        this.createTableRow(headTr, bodyTr, this.model.json);
         fragment.appendChild(table);
         container.innerHTML = "";
         container.appendChild(fragment);
         this.downloadJson();
         this.downloadCsv();
     },
-    createTableStructure: function (head, body, _json) {
+    createTableRow: function (head, body, _json) {
         _json.forEach(function (item, index) {
 
             let thHead = document.createElement("th");
@@ -204,11 +204,7 @@ let controller = {
     },
     soundPlay() {
         this.audio.play();
-        let that = this;
-        setTimeout(function () {
-            that.audio.currentTime = 0.0;
-        }, 2000)
-    },
+   },
     changeModelRemoveSelectField(ev) {
         this.model.cellNum = false;
         this.model.fieldName = false;

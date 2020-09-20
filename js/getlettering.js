@@ -49,20 +49,13 @@ function getWord(_string) {
         _DICTIONARY = DICTIONARY[controller.model.lang ]
     }
     if(_string){
-        console.log(_DICTIONARY, _string)
         return _DICTIONARY[ _string]
     } else {
-
         document.querySelectorAll("button,textarea, a").forEach(function (node) {
-
-
             if (node.textContent || node.getAttribute("placeholder")) {
-
-
                 changeContent(node)
 
             }
-
         });
     }
 
@@ -83,8 +76,6 @@ function getWord(_string) {
         } else if (node.textContent) {
 
             if (!_DICTIONARY[inscription]) {
-
-
                 node.textContent = DICTIONARY[defaultLang][inscription];
             } else {
 
@@ -92,6 +83,4 @@ function getWord(_string) {
             }
         }
     }
-
-
 }
