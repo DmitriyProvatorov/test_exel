@@ -8,8 +8,6 @@ window.onload = function(){
 
     document.querySelector('.menu').addEventListener('click', controller.events.bind(controller));
     document.querySelector('.get_file').addEventListener('click', controller.loadFile.bind(controller));
-
-    controller.createAudio();
     getWord();
 }
 

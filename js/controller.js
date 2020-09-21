@@ -1,11 +1,6 @@
-let controller = {
+const controller = {
     model: {json: null, lang: document.documentElement.lang},
-    createAudio: function () {
-        const audio = new Audio();
-        audio.preload = 'auto';
-        audio.src = "./sounds/Sound_08029.mp3";
-        this.audio = audio;
-    },
+
     getJson: function (jsonString) {
 
         try {
@@ -25,7 +20,7 @@ let controller = {
                     arrCsv[1] = arrCsv[1].split(",");
                     this.model.json = [];
                     let _lenghtMax = arrCsv[0].length > arrCsv[1].length ? arrCsv[0].length : arrCsv[1].length;
-                    for (let i = 0; i <= _lenghtMax; i++) {
+                    for (let i = 0; i < _lenghtMax; i++) {
                         this.model.json.push({name: arrCsv[0][i], value: arrCsv[1][i]});
                     }
                 }
@@ -33,6 +28,7 @@ let controller = {
         }
     },
     create: function () {
+
         let jsonString = document.querySelector('textarea').value;
         controller.model.json = false;
         controller.getJson(jsonString);
@@ -63,6 +59,7 @@ let controller = {
         container.appendChild(fragment);
         this.downloadJson();
         this.downloadCsv();
+
     },
     createTableRow: function (head, body, _json) {
         _json.forEach(function (item, index) {
@@ -80,7 +77,7 @@ let controller = {
             head.appendChild(thHead);
             body.appendChild(thBody);
         });
-        this.soundPlay();
+        audio.soundPlay();
     },
     createJsonString: function () {
 
@@ -202,9 +199,7 @@ let controller = {
             this.changeModelRemoveSelectField(ev)
         }
     },
-    soundPlay() {
-        this.audio.play();
-   },
+
     changeModelRemoveSelectField(ev) {
         this.model.cellNum = false;
         this.model.fieldName = false;

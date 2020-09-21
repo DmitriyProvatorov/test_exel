@@ -83,4 +83,5 @@ function getWord(_string) {
             }
         }
     }
-}
+};
+
