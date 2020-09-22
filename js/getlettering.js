@@ -40,9 +40,6 @@ function getWord(_string) {
             "Change Order With" : "Поменять местами c"
         }
     }
-
-
-
     if (!DICTIONARY[controller.model.lang]) {
         _DICTIONARY = DICTIONARY[defaultLang]
     } else {
@@ -58,27 +55,19 @@ function getWord(_string) {
             }
         });
     }
-
     function changeContent(node) {
-
         let inscription = node.textContent || node.getAttribute("placeholder");
 
         if (node.hasAttribute("placeholder")) {
-
             if (!_DICTIONARY[inscription]) {
-
                 node.setAttribute("placeholder", DICTIONARY[defaultLang][inscription]);
             } else {
-
                 node.setAttribute("placeholder", _DICTIONARY[inscription]);
-
             }
         } else if (node.textContent) {
-
             if (!_DICTIONARY[inscription]) {
                 node.textContent = DICTIONARY[defaultLang][inscription];
             } else {
-
                 node.textContent = _DICTIONARY[inscription]
             }
         }

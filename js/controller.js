@@ -1,17 +1,12 @@
 const controller = {
     model: {json: null, lang: document.documentElement.lang},
-
     getJson: function (jsonString) {
-
         try {
             this.model.json = JSON.parse(jsonString);
-
         } catch (e) {
             alert(getWord("Not valid Json"));
         } finally {
             s = jsonString.split("\n");
-
-
             if (!this.model.json) {
                 if (/,/.test(jsonString) && /\n/.test(jsonString)) {
                     alert(getWord("check CSV"))
@@ -28,12 +23,10 @@ const controller = {
         }
     },
     create: function () {
-
         let jsonString = document.querySelector('textarea').value;
         controller.model.json = false;
         controller.getJson(jsonString);
         controller.createTable();
-
     },
 // [{"name":"name1", "value":"value1"},{"name":"name2", "value":"value2"}]
     createTable: function () {
@@ -47,8 +40,6 @@ const controller = {
         let headTr = document.createElement("tr");
         let tbody = document.createElement("tbody");
         let bodyTr = document.createElement("tr");
-
-
         tbody.appendChild(bodyTr);
         thead.appendChild(headTr);
         table.appendChild(thead);
@@ -59,11 +50,9 @@ const controller = {
         container.appendChild(fragment);
         this.downloadJson();
         this.downloadCsv();
-
     },
     createTableRow: function (head, body, _json) {
         _json.forEach(function (item, index) {
-
             let thHead = document.createElement("th");
             thHead.textContent = item.name;
             thHead.dataset.cellNum = index;
@@ -80,28 +69,23 @@ const controller = {
         audio.soundPlay();
     },
     createJsonString: function () {
-
         return JSON.stringify(this.model.json);
     },
     createStringCSV: function (_arr, paramName) {
         let _string = "";
         _arr.forEach(function (item, index) {
-
             if (index) {
                 _string += ",";
             }
             _string = _string + item[paramName];
-
         });
         return _string;
     },
     createCSV: function () {
         let _string = "";
-
         _string += this.createStringCSV(this.model.json, "name");
         _string += "\n";
         _string += this.createStringCSV(this.model.json, "value");
-
         return _string;
     },
     addToTextArea: function (_string) {
@@ -110,16 +94,12 @@ const controller = {
     addTextAreaJson: function () {
         let _string = this.createJsonString();
         this.addToTextArea(_string);
-
-
-    },
+   },
     addTextAreaCSV: function () {
         let _string = this.createCSV();
         this.addToTextArea(_string)
-
     },
     showHideMenu(ev) {
-
         if (ev.srcElement.nodeName != "TH") {
             return;
         }
@@ -130,7 +110,6 @@ const controller = {
             this.changeFields(ev);
             return;
         }
-
         if (!this.model.cellectedField) {
             _menu.style.display = "block";
             controller.model.showMenu = true;
@@ -139,58 +118,33 @@ const controller = {
             _menu.style.display = "none";
             controller.model.showMenu = false;
             this.model.cellectedField = false;
-
-
         } else {
-
             _menu.style.display = "block";
             controller.model.showMenu = true;
-
             this.model.cellectedField = ev.target;
         }
-
-
-
         this.selectСell(ev);
-
-
     },
-
     changeFields(ev){
-
         if(!this.model.cellNumForChange){
             return;
         }
-
         let cellNum = ev.target.dataset.cellNum;
         let fieldName = ev.target.dataset.fieldName;
-
         let _dataChange = JSON.parse(JSON.stringify(this.model.json[cellNum]));
-
         this.model.json[cellNum]= this.model.json[this.model.cellNumForChange];
           this.model.json[this.model.cellNumForChange] = _dataChange;
-
-        this.model.cellNumForChange = false;
+          this.model.cellNumForChange = false;
         this.model.fieldNameForChange = false;
-
         this.createTable();
-
-    },
+   },
     selectСell(ev) {
-
         if (this.model.json) {
-
             let _th = document.querySelectorAll("th");
-
             _th.forEach(function (item) {
-
                 item.classList.remove("active");
-
             });
-
-
         }
-
         if (this.model.showMenu) {
             ev.target.classList.add("active")
             this.model.cellNum = ev.target.dataset.cellNum;
@@ -199,7 +153,6 @@ const controller = {
             this.changeModelRemoveSelectField(ev)
         }
     },
-
     changeModelRemoveSelectField(ev) {
         this.model.cellNum = false;
         this.model.fieldName = false;
@@ -219,7 +172,6 @@ const controller = {
                 let _input = document.createElement("input");
                 //_input.type = "string";
                 _input.addEventListener("keyup", function (ev) {
-
                     if (ev.keyCode === 13) {
                         // Cancel the default action, if needed
                         ev.preventDefault();
@@ -229,10 +181,8 @@ const controller = {
                         controller.changeModelRemoveSelectField(ev);
                         controller.createTable();
                     }
-
                 });
                 this.model.cellectedField.classList.remove("active");
-
                 this.model.cellectedField.innerHTML = "";
                 this.model.cellectedField.appendChild(_input);
                 break;
@@ -243,15 +193,11 @@ const controller = {
                 this.createTable();
                 break;
             case "change-order":
-
-
                 this.model.cellNumForChange =  this.model.cellNum;
                 this.model.fieldNameForChange =  this.model.fieldName;
                 break;
         }
-
         document.querySelector('.menu').style.display = "none";
-
     },
     downloadJson(){
         let a = document.querySelectorAll("a")[0];
@@ -269,19 +215,13 @@ const controller = {
         this.model.json = false;
         let inputFile = document.querySelector("#input_file");
         inputFile.click();
-
         inputFile.onchange =function() {
-
-
-            var reader = new FileReader();
+            let reader = new FileReader();
             reader.addEventListener('load', function () {
-
                 controller.getJson(this.result);
                 controller.createTable();
-
             });
             reader.readAsText(inputFile.files[0]);
         }
     }
-
 };

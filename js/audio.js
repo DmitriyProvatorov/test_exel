@@ -5,7 +5,6 @@ const audio = {
         audio.src = "./sounds/Sound_08029.mp3";
         this.audio = audio;
     },
-
     soundPlay() {
         if (!this.audio) {
            this.createAudio();

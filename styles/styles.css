@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
 }
-
 textarea {
     overflow: auto;
     resize: vertical;
@@ -25,16 +24,13 @@ textarea {
     border-right: none;
     margin-bottom: 1em;
 }
-
 textarea:focus {
     outline: none !important;
     border: 1px solid #29B0D9 !important;
     border-top: none !important;
     border-left: none !important;
     border-right: none !important;
-
 }
-
 button, a {
     color: #fff;
     background-color: #6c757d;
@@ -55,8 +51,6 @@ button, a {
     border-radius: .25rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
-
-
 table {
     width: 100%;
     max-width: 100%;
@@ -64,63 +58,44 @@ table {
     border-spacing: 2px;
     border-color: grey;
     border-collapse: collapse;
-
 }
-
 table thead th {
     vertical-align: bottom;
     border-bottom: 2px solid #eceeef;
 }
-
 tbody {
     display: table-row-group;
     vertical-align: middle;
     border-color: inherit;
 }
-
 tr {
     display: table-row;
     vertical-align: inherit;
     border-color: inherit;
 }
-
 table th, table td {
     padding: 0.75rem;
     vertical-align: top;
     border-top: 1px solid #eceeef;
-
-
 }
-
-
 @media (min-width: 544px) {
     .table_container {
         padding: 1.5rem;
         margin: 5px;
         border-width: .2rem;
         border: 2px solid #eceeef;
-
     }
 }
-
 tbody th {
     font-weight: normal;
     cursor: pointer;
 }
+th {}
 
-th {
-
-
-}
-
-tr {
-
-}
-
+tr {}
 .events {
     margin-top: 1em;
 }
-
 .menu {
     position: absolute;
     background-color: #6c757d;
@@ -131,15 +106,12 @@ tr {
     height: 2.5em;
     display: none
 }
-
 button {
     cursor: pointer;
 }
-
 .active {
     background-color: cornsilk;
 }
-
 input {
     height: 2em;
     width: 100%;
